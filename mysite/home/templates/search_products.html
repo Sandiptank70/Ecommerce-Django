@@ -1,6 +1,6 @@
 {% extends 'homebase.html' %}
 
-{% block title %} {{ setting.title}} {% endblock %}
+{% block title %} {{ query }} result {% endblock %}
 {% block description %}{{setting.description}} {% endblock %}
 {% block keywords %}{{setting.keywords}} {% endblock %}
 {% block slidebar %}  {% include 'slidebar.html' %}      {% endblock %}
@@ -12,7 +12,7 @@
 		<div class="container">
 			<ul class="breadcrumb">
 				<li><a href="#">Home</a></li>
-				<li class="active"> {{ catdata.title }}</li> </li>
+				<li class="active"> {{ query }} result </li> </li>
 			</ul>
 		</div>
 	</div>

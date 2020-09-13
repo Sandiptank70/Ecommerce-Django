@@ -44,7 +44,8 @@ def category_products(request,id,slug):
     products=product.objects.filter(catagory_id=id)
     context = {
                'products' :products,
-               'category': category}
+               'category': category,
+     'catdata':catdata}
     return render(request, 'category_products.html', context)
 
 def search(request):
@@ -54,11 +55,11 @@ def search(request):
             query=form.cleaned_data['query']
             catid=form.cleaned_data['catid']
             if catid==0:
-                products=product.objects.filter(title_icontains=query)
+                Products=product.objects.filter(title=query)
             else:
-                products = product.objects.filter(title_icontains=query,catagory_id=catid)
-            category=catagory.objects.all()
-            context={'products':products,'category': category}
+                Products = product.objects.filter(title=query,catagory_id=catid)
+            Category=catagory.objects.all()
+            context={'products':Products,'query':query,'category': Category}
             return render(request,'search_products.html',context)
     return HttpResponseRedirect('/')
 
