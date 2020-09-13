@@ -15,6 +15,8 @@ from product.models import product
 
 from home.forms import SearchForm
 
+from product.models import Images
+
 
 def index(request):
     setting=Settings.objects.get(pk=1)
@@ -80,6 +82,17 @@ def search_auto(request):
     data = 'fail'
   mimetype = 'application/json'
   return HttpResponse(data, mimetype)
+
+def product_detail(request,id,slug):
+    category=catagory.objects.all()
+    Product=product.objects.get(pk=id)
+    images=Images.objects.filter(product_id=id)
+    context = {
+               'Product' :Product,
+               'category': category,
+               'images': images,
+     }
+    return render(request, 'product_detail.html', context)
 
 
 
