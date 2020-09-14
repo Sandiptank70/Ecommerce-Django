@@ -227,8 +227,8 @@
 										<td class="details"><a href="/category/{{rs.catagory_id}}/{{rs.category_slug}}">{{ rs.catagory }}</a></td>
 										<td class="price text-center"><strong>{{ rs.price }}</strong><br><del class="font-weak"><small>$40.00</small></del></td>
 										<td class="qty text-center"><input class="input" type="number" value="1"></td>
-										<a href="/addtocart/{{rs.id}}" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
-										<td class="text-right"><a href="/addtocart/{{rs.id}}" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
+										<a href="/order/addtoshopcart/{{Product.id}}" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
+										<td class="text-right"><a href="/order/addtoshopcart/{{Product.id}}" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
 									</tr>
 										{% endfor %}
 								</tbody>

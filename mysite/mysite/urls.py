@@ -24,14 +24,16 @@ from home import views
 
 urlpatterns = [
     path('',include('home.urls')),
-    path('home/',include('home.urls')),
+    path('home/', include('home.urls')),
+    path('product/',include('product.urls')),
+    path('order/',include('order.urls')),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('admin/', admin.site.urls),
+
     path('about/',views.aboutus,name='aboutus'),
     path('contact/',views.contactus,name='contact'),
     path('search/',views.search,name='search'),
     path('search_auto/',views.search_auto,name='search_auto'),
-    path('product/',include('product.urls')),
-    path('admin/', admin.site.urls),
-    path('ckeditor/', include('ckeditor_uploader.urls')),
     path('category/<int:id>/<slug:slug>',views.category_products,name='category_products'),
     path('product/<int:id>/<slug:slug>',views.product_detail,name="product_detail")
 ]

@@ -53,6 +53,7 @@ class productAdmin(admin.ModelAdmin):
      #readonly_fields = ('image_tag',)
      inlines =[ProductImageInline]
      prepopulated_fields = {'slug':('title',)}
-admin.site.register(catagory,categoryAdmin)
+
+admin.site.register(catagory,CategoryAdmin2)
 admin.site.register(product,productAdmin)
 admin.site.register(Images)
