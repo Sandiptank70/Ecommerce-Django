@@ -25,4 +25,3 @@ class ShopCartForm(ModelForm):
     class Meta:
         model = ShopCart
         fields=['quantity']
-

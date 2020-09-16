@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
@@ -11,11 +12,11 @@ from order.models import ShopCartForm
 def index(request):
     return HttpResponse("order page")
 
-
+@login_required(login_url='/login')
 def addtoshopcart(request,id):
     url=request.META.get('HTTP_REFERER')
     current_user=request.user
-    checkout=ShopCart.objects.filter(product_id=id)
+    checkout=ShopCart.objects.filter(Product_id=id)
     if(checkout):
         control=1
     else:
@@ -25,7 +26,7 @@ def addtoshopcart(request,id):
         form=ShopCartForm(request.POST)
         if form.is_valid():
             if control==1:
-                data=ShopCart.objects.get(product_id=id)
+                data=ShopCart.objects.get(Product_id=id)
                 data.quantity +=form.cleaned_data['quantity']
                 data.save()
             else:

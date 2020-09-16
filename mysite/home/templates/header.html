@@ -6,6 +6,13 @@
 			<div class="container">
 				<div class="pull-left">
 					<span>Welcome to E-shop!</span>
+					{% if messages %}
+						{% for message in messages %}
+							<div class="alert alert-{{message.tages}}" role="alert">
+								{{ message }}
+							</div>
+						{% endfor %}
+					{% endif %}
 				</div>
 				<div class="pull-right">
 					<ul class="header-top-links">
