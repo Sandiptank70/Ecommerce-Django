@@ -8,6 +8,8 @@ from product.models import catagory
 
 from user.models import UserProfile
 
+from user.forms import SignUpForm
+
 
 def index(request):
     return HttpResponse("user app ")
@@ -34,8 +36,25 @@ def login_form(request):
     return render(request, 'login_form.html',context)
 
 def signup_form(request):
+    if request.method == 'POST':
+        form=SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            password =  form.cleaned_data.get('password1')
+            user = authenticate( username=username, password=password)
+            login(request, user)
+            return HttpResponseRedirect('/')
+        else:
+            messages.warning(request,form.errors)
+            return HttpResponseRedirect('/signup')
+    form=SignUpForm()
     Category = catagory.objects.all()
-    context = {'category': Category}
-    return HttpResponse("signup form")
-
+    context = {'category': Category,
+               'form':form,
+               }
+    return render(request,'signup_form.html',context)
+# def logout_func(request):
+#     logout (request)
+#     return HttpResponseRedirect('/')
 
