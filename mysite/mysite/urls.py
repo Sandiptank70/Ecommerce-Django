@@ -40,6 +40,7 @@ urlpatterns = [
     path('product/<int:id>/<slug:slug>',views.product_detail,name="product_detail"),
     path ('login/',UserViews.login_form,name='login_form'),
     path ('signup/',UserViews.signup_form,name='signup_form'),
+    path ('logout/',UserViews.logout_func,name='logout_func'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
