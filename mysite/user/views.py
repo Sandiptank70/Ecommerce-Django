@@ -11,6 +11,9 @@ from user.models import UserProfile
 
 from user.forms import SignUpForm
 
+from user.forms import UserUpdateForm, ProfileUpdateForm
+
+
 @login_required(login_url='/login')
 def index(request):
 
@@ -74,5 +77,22 @@ def logout_func(request):
     logout (request)
     return HttpResponseRedirect('/')
 
-
-
+@login_required(login_url='/login')
+def user_update(request):
+    if request.method=='POST':
+        user_from=UserUpdateForm(request.POST,instance=request.user)
+        profile_form=ProfileUpdateForm(request.POST,request.FILES,instance=request.user.userprofile)
+        if user_from.is_valid() and profile_form.is_valid():
+            user_from.save()
+            profile_form.save()
+            messages.success(request,"your profile update")
+            return HttpResponseRedirect('/user')
+    else:
+        Category = catagory.objects.all()
+        user_from = UserUpdateForm(instance=request.user)
+        profile_form = ProfileUpdateForm(instance=request.user.userprofile)
+        context = {'category': Category,
+                   'user_from': user_from,
+                   'profile_form':profile_form
+                   }
+        return render(request,'user_update.html',context)
