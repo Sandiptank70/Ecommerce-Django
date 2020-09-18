@@ -11,7 +11,7 @@ class ShopCart(models.Model):
     Product=models.ForeignKey(product,on_delete=models.SET_NULL,null=True)
     quantity=models.IntegerField()
     def __self__(self):
-        return self.Product
+        return self.Product.title
 
     @property
     def price(self):
@@ -19,7 +19,7 @@ class ShopCart(models.Model):
 
     @property
     def amount(self):
-        return (self.quantity * self.Product.price)
+        return (self.quantity)
 
 class ShopCartForm(ModelForm):
     class Meta:

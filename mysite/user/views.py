@@ -36,8 +36,8 @@ def login_form(request):
         if user is not None:
             login(request,user)
             current_user=request.user
-            userprofile=UserProfile.objects.filter(user_id=current_user.id)
-            # request.session['userimage']=userprofile.image.url
+            userprofile=UserProfile.objects.get(user_id=current_user.id)
+            request.session['userimage']=userprofile.image.url
             return HttpResponseRedirect('/')
         else:
             messages.warning(request,"Login Error !! username and password incorred")

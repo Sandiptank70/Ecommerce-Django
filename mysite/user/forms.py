@@ -27,11 +27,6 @@ class UserUpdateForm(UserChangeForm):
             'last_name':TextInput(attrs={'class':'input','placeholder':'last_name'})
 
         }
-CITY=[
-    ('junagadh','junagadh'),
-    ('Amreli','Amreli'),
-    ('Rajula','Rajula'),
-]
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model=UserProfile

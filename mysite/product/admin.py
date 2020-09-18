@@ -7,6 +7,8 @@ import mysite
 # Register your models here.
 from product.models import catagory, product, Images
 
+from product.models import Comment
+
 
 class categoryAdmin(admin.ModelAdmin):
     list_display = ['title','parent','status']
@@ -53,7 +55,12 @@ class productAdmin(admin.ModelAdmin):
      #readonly_fields = ('image_tag',)
      inlines =[ProductImageInline]
      prepopulated_fields = {'slug':('title',)}
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ['subject','comment', 'status','create_at']
+    list_filter = ['status']
+    readonly_fields= ('subject','comment',)
 
 admin.site.register(catagory,CategoryAdmin2)
 admin.site.register(product,productAdmin)
+admin.site.register(Comment,CommentAdmin)
 admin.site.register(Images)
