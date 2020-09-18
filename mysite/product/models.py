@@ -107,5 +107,5 @@ class Comment(models.Model):
         return self.subject
 class CommentForm(ModelForm):
     class meta:
-        model =Comment
-        fields=['subject','comment','rate']
+            model =Comment
+            fields=['subject','comment','rate']

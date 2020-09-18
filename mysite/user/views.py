@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
@@ -44,6 +44,12 @@ def signup_form(request):
             password =  form.cleaned_data.get('password1')
             user = authenticate( username=username, password=password)
             login(request, user)
+            current_user=request.user
+            data=UserProfile()
+            data.user_id=current_user.id
+            data.image="images/users/user.png"
+            data.save()
+            messages.success(request,'your acnt crt')
             return HttpResponseRedirect('/')
         else:
             messages.warning(request,form.errors)
@@ -54,7 +60,9 @@ def signup_form(request):
                'form':form,
                }
     return render(request,'signup_form.html',context)
-# def logout_func(request):
-#     logout (request)
-#     return HttpResponseRedirect('/')
+def logout_func(request):
+    logout (request)
+    return HttpResponseRedirect('/')
+
+
 
