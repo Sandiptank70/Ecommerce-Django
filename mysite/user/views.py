@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
@@ -10,9 +11,18 @@ from user.models import UserProfile
 
 from user.forms import SignUpForm
 
-
+@login_required(login_url='/login')
 def index(request):
-    return HttpResponse("user app ")
+
+    Category=catagory.objects.all()
+    current_user=request.user
+    profile=UserProfile.objects.get(user_id=current_user.id)
+    context={
+        'category': Category,
+        'profile':profile
+
+    }
+    return render(request,'user_profile.html',context)
 
 
 def login_form(request):
@@ -24,7 +34,7 @@ def login_form(request):
             login(request,user)
             current_user=request.user
             userprofile=UserProfile.objects.filter(user_id=current_user.id)
-            request.session['userimage']=userprofile.image.url
+            # request.session['userimage']=userprofile.image.url
             return HttpResponseRedirect('/')
         else:
             messages.warning(request,"Login Error !! username and password incorred")
