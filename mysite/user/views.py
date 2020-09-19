@@ -1,6 +1,7 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
@@ -96,3 +97,22 @@ def user_update(request):
                    'profile_form':profile_form
                    }
         return render(request,'user_update.html',context)
+
+@login_required(login_url='/login')
+def user_password(request):
+
+    if request.method=='POST':
+        form=PasswordChangeForm(request.user,request.POST)
+        if form.is_valid():
+            user=form.save()
+            update_session_auth_hash(request , user)
+            messages.success(request,"Your Password Has Success to Update")
+            return HttpResponseRedirect('/user')
+        else:
+            messages.error(request,'please connect the error below .<br>'+ str(form.errors))
+            return HttpResponseRedirect('/user/password')
+    else:
+        Category=catagory.objects.all()
+        form=PasswordChangeForm(request.user)
+        return render(request,'user_password.html',{'form': form,'category': Category}
+                  )

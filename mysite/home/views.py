@@ -17,6 +17,8 @@ from home.forms import SearchForm
 
 from product.models import Images
 
+from product.models import Comment
+
 
 def index(request):
     setting=Settings.objects.get(pk=1)
@@ -87,10 +89,12 @@ def product_detail(request,id,slug):
     category=catagory.objects.all()
     Product=product.objects.get(pk=id)
     images=Images.objects.filter(product_id=id)
+    comments=Comment.objects.filter(product_id=id,status='True')
     context = {
                'Product' :Product,
                'category': category,
                'images': images,
+                'comments':comments
      }
     return render(request, 'product_detail.html', context)
 

@@ -58,7 +58,7 @@ class productAdmin(admin.ModelAdmin):
 class CommentAdmin(admin.ModelAdmin):
     list_display = ['subject','comment', 'status','create_at']
     list_filter = ['status']
-    readonly_fields= ('subject','comment',)
+    readonly_fields= ('subject','comment','ip','user','product','rate')
 
 admin.site.register(catagory,CategoryAdmin2)
 admin.site.register(product,productAdmin)
