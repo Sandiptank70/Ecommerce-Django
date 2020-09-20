@@ -20,7 +20,7 @@
 						<li><a href="#">Newsletter</a></li>
 						<li><a href="#">FAQ</a></li>
 						<li class="dropdown default-dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">ENG <i class="fa fa-caret-down"></i></a>
+							<a aria-expanded="true" class="dropdown-toggle" data-toggle="dropdown">ENG <i class="fa fa-caret-down"></i></a>
 							<ul class="custom-menu">
 								<li><a href="#">English (ENG)</a></li>
 								<li><a href="#">Russian (Ru)</a></li>
@@ -29,7 +29,7 @@
 							</ul>
 						</li>
 						<li class="dropdown default-dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">USD <i class="fa fa-caret-down"></i></a>
+							<a aria-expanded="true" class="dropdown-toggle" data-toggle="dropdown">USD <i class="fa fa-caret-down"></i></a>
 							<ul class="custom-menu">
 								<li><a href="#">USD ($)</a></li>
 								<li><a href="#">EUR (€)</a></li>
@@ -48,7 +48,7 @@
 					<!-- Logo -->
 					<div class="header-logo">
 						<a class="logo" href="/">
-							<img src="{% static '' %}img/logo.png" alt="">
+							<img alt="" src="{% static '' %}img/logo.png">
 						</a>
 					</div>
 					<!-- /Logo -->
@@ -74,8 +74,8 @@
 					<div class="header-search">
 						<form action="/search/"method="post">
 							{% csrf_token %}
-							<input id="query" name="query" class="input search-input" type="text" placeholder="Enter your keyword">
-							<select name="catid" class="input search-categories">
+							<input class="input search-input" id="query" name="query" placeholder="Enter your keyword" type="text">
+							<select class="input search-categories" name="catid">
 								<option value="0">All Categories</option>
 								{% load mptt_tags %}
 								{% recursetree category %}
@@ -98,14 +98,14 @@
 						<!-- Account -->
 						<li class="header-account dropdown default-dropdown">
 							{% if user.id is not None %}
-							<div class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true">
+							<div aria-expanded="true" class="dropdown-toggle" data-toggle="dropdown" role="button">
 								<div class="header-btns-icon">
-									<img src="{{ request.session.userimage }}" style="height:40px;border-radius:30%" alt="">
+									<img alt="" src="{{ request.session.userimage }}" style="height:40px;border-radius:30%">
 								</div>
 								<strong class="text-uppercase">{{user.first_name}} <i class="fa fa-caret-down"></i></strong>
 							</div>
 							{% else %}
-							<a href="/login" class="text-uppercase">Login</a> / <a href="/signup" class="text-uppercase">Sign Up</a>
+							<a class="text-uppercase" href="/login">Login</a> / <a class="text-uppercase" href="/signup">Sign Up</a>
 							{% endif %}
 							<ul class="custom-menu">
 			<li><a href="/user"><i class="fa fa-user-o"></i> My Account</a></li>
@@ -119,7 +119,7 @@
 
 						<!-- Cart -->
 						<li class="header-cart dropdown default-dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+							<a aria-expanded="true" class="dropdown-toggle" data-toggle="dropdown">
 								<div class="header-btns-icon">
 									<i class="fa fa-shopping-cart"></i>
 									<span class="qty">3</span>
@@ -133,7 +133,7 @@
 									<div class="shopping-cart-list">
 										<div class="product product-widget">
 											<div class="product-thumb">
-												<img src="{% static '' %}img/thumb-product01.jpg" alt="">
+												<img alt="" src="{% static '' %}img/thumb-product01.jpg">
 											</div>
 											<div class="product-body">
 												<h3 class="product-price">$32.50 <span class="qty">x3</span></h3>
@@ -143,7 +143,7 @@
 										</div>
 										<div class="product product-widget">
 											<div class="product-thumb">
-												<img src="{% static '' %}img/thumb-product01.jpg" alt="">
+												<img alt="" src="{% static '' %}img/thumb-product01.jpg">
 											</div>
 											<div class="product-body">
 												<h3 class="product-price">$32.50 <span class="qty">x3</span></h3>
