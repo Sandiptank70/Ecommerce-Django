@@ -21,6 +21,7 @@ from django.urls import path, include
 
 import  home
 from home import views
+from order import views as OrderViews
 from user import views as UserViews
 
 urlpatterns = [
@@ -41,6 +42,7 @@ urlpatterns = [
     path ('login/',UserViews.login_form,name='login_form'),
     path ('signup/',UserViews.signup_form,name='signup_form'),
     path ('logout/',UserViews.logout_func,name='logout_func'),
+    path('shopcart/',OrderViews.shopcart,name='shopcart'),
 
 ]
 if settings.DEBUG:

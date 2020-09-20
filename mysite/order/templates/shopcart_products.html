@@ -1,0 +1,89 @@
+{% extends 'homebase.html' %}
+
+{% block title %} Shopcart {% endblock %}
+{% block description %}{{setting.description}} {% endblock %}
+{% block keywords %}{{setting.keywords}} {% endblock %}
+{% block slidebar %}  {% include 'slidebar.html' %}      {% endblock %}
+
+{% block body %}
+
+	<!-- BREADCRUMB -->
+	<div id="breadcrumb">
+		<div class="container">
+			<ul class="breadcrumb">
+				<li><a href="#">Home</a></li>
+				<li class="active"> Shopcart </li> </li>
+			</ul>
+		</div>
+	</div>
+	<!-- /BREADCRUMB -->
+
+<!-- section -->
+	<div class="section">
+		<!-- container -->
+		<div class="container">
+			<!-- row -->
+			<div class="row">
+
+				<div class="col-md-12">
+					<div class="order-summary cleafixr">
+						<div class="section-title">
+							<h3 class="title">Shop Cart Product list</h3>
+						</div>
+						<table class="shopping-cart-table table">
+							<thead>
+							<tr>
+								<th>Product</th>
+								<th></th>
+								<th class="text-center">Price</th>
+								<th class="text-center">Quantity</th>
+								<th class="text-center">Total</th>
+								<th class="text-center"></th>
+							</tr>
+							</thead>
+							<tbody>
+							{% for rs in shopcart %}
+							<tr>
+								<td class="thumb"><img alt="" src="{{rs.Product.image.url}}"></td>
+								<td class="details"><a href="/product/{{rs.Product.id}}/{{rs.Product.slug}}">{{rs.Product}}</a>
+
+								</td>
+								<td class="price text-center"><strong>Rs.{{rs.Product.price}}</strong></td>
+								<td class="qty text-center"><strong>{{rs.quantity}}</strong></td>
+								<td class="total text-center"><strong class="primary-color">Rs.{{rs.amount}}</strong></td>
+								<td class="text-right"><a href="/order/deletefromcart/{{rs.id}}" onclick="return confirm('delete ! are you sure ?') " class="main-btn icon-btn"><i class="fa fa-close"></i></a></td>
+
+							</tr>
+							{% endfor %}
+							</tbody>
+<tfoot>
+<tr>
+	<th class="empty" colspan="3"></th>
+	<th>Sub Total</th>
+	<th class="sub-total" colspan="2">Rs.{{ total }}</th>
+</tr>
+<tr>
+	<th class="empty" colspan="3"></th>
+	<th>Shiping</th>
+	<td colspan="2">Free Shipping</td>
+</tr>
+<tr>
+	<th class="empty" colspan="3"></th>
+	<th>Sub Total</th>
+	<th class="total" colspan="2">Rs.{{ total }}</th>
+</tr>
+</tfoot>
+						</table>
+						<div class="pull-right">
+							<button class="primary-btn">Place Order</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /row -->
+		</div>
+		<!-- /container -->
+	</div>
+	<!-- /section -->
+{% endblock %}
+{% block footer %} {% include 'footer.html' %} {%endblock%}

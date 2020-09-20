@@ -8,6 +8,8 @@ from order.models import ShopCart
 
 from order.models import ShopCartForm
 
+from product.models import catagory, product, Images, Comment
+
 
 def index(request):
     return HttpResponse("order page")
@@ -50,3 +52,23 @@ def addtoshopcart(request,id):
             data.save()
         messages.success(request, "add to cart")
         return HttpResponseRedirect(url)
+def shopcart(request):
+    category = catagory.objects.all()
+    current_user = request.user
+    shopcart = ShopCart.objects.filter(user_id=current_user.id)
+    total=0
+    for rs in shopcart:
+        total += rs.Product.price * rs.quantity
+    context = {
+        'shopcart': shopcart,
+        'category': category,
+        'total': total,
+
+    }
+    return render(request,'shopcart_products.html', context)
+
+@login_required(login_url='/login')
+def deletefromcart(request,id):
+    ShopCart.objects.filter(id=id).delete()
+    messages.success(request,"your item Delete From shopcart")
+    return HttpResponseRedirect("/shopcart")
