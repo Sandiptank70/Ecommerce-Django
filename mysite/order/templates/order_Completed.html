@@ -1,0 +1,49 @@
+{% extends 'homebase.html' %}
+
+{% block title %} ordercmplt {% endblock %}
+{% block description %}{{setting.description}} {% endblock %}
+{% block keywords %}{{setting.keywords}} {% endblock %}
+{% block slidebar %}  {% include 'slidebar.html' %}      {% endblock %}
+
+{% block body %}
+
+	<!-- BREADCRUMB -->
+	<div id="breadcrumb">
+		<div class="container">
+			<ul class="breadcrumb">
+				<li><a href="#">Home</a></li>
+				<li class="active"> ordercmplt </li>
+			</ul>
+		</div>
+	</div>
+	<!-- /BREADCRUMB -->
+
+<!-- section -->
+	<div class="section">
+		<!-- container -->
+		<div class="container">
+			<!-- row -->
+			<div class="row">
+
+				<div class="col-md-12">
+					<div class="order-summary cleafixr">
+						<div class="section-title">
+							<h3 class="title">order completed</h3>
+						</div>
+						<hr>
+						<h2>Dear{{ user.first_name}} {{ user.last_name}} </h2>
+						<hr>
+						<h3>your order is complt</h3>
+						<h3>ordercode:{{ordercode}}</h3>
+						<h3>aabhar sah</h3>
+
+					</div>
+				</div>
+			</div>
+			<!-- /row -->
+		</div>
+		<!-- /container -->
+	</div>
+	<!-- /section -->
+{% endblock %}
+{% block footer %} {% include 'footer.html' %} {%endblock%}

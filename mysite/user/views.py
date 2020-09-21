@@ -6,6 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
+from django.utils.crypto import get_random_string
 from product.models import catagory
 
 from user.models import UserProfile
@@ -13,6 +14,11 @@ from user.models import UserProfile
 from user.forms import SignUpForm
 
 from user.forms import UserUpdateForm, ProfileUpdateForm
+
+from order.models import ShopCart, OrderForm, Order
+
+from order.models import OrderProduct
+from product.models import product
 
 
 @login_required(login_url='/login')
@@ -114,5 +120,14 @@ def user_password(request):
     else:
         Category=catagory.objects.all()
         form=PasswordChangeForm(request.user)
-        return render(request,'user_password.html',{'form': form,'category': Category}
-                  )
+        return render(request,'user_password.html',{'form': form,'category': Category})
+
+
+
+
+
+
+
+
+
+

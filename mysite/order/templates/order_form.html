@@ -1,0 +1,165 @@
+{% extends 'homebase.html' %}
+
+{% block title %} Order Page {% endblock %}
+{% block description %}{{setting.description}} {% endblock %}
+{% block keywords %}{{setting.keywords}} {% endblock %}
+{% block slidebar %}  {% include 'slidebar.html' %}      {% endblock %}
+
+{% block body %}
+
+<!-- BREADCRUMB -->
+<div id="breadcrumb">
+    <div class="container">
+        <ul class="breadcrumb">
+            <li><a href="#">Home</a></li>
+            <li class="active"> Order Page</li>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- /BREADCRUMB -->
+
+<!-- section -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+
+        <div class="row">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="col-md-6">
+                    <div class="billing-details">
+
+
+                        <div class="section-title">
+                            <h3 class="title">Shipping Details</h3>
+                        </div>
+                        <p><label for="id_first_name"> First Name</label>
+                            <input class="input" type="text" value="{{user.first_name}}" maxlength="10" required
+                                   name="first-name" placeholder="First Name">
+                        </p>
+                        <p><label for="id_last_name"> Last Name</label>
+                            <input class="input" type="text" value="{{user.last_name}}" maxlength="10" required
+                                   name="last-name" placeholder="Last Name">
+                        </p>
+
+                        <p><label for="id_address"> Address</label>
+                            <input class="input" type="text" value="{{profile.address}}" maxlength="150" required
+                                   name="address" placeholder="Address">
+                        </p>
+                        <p><label for="id_phone"> Phone</label>
+                            <input class="input" type="text" value="{{profile.phone}}" maxlength="20" required
+                                   name="Phone"
+                                   placeholder="Phone">
+                        </p>
+                        <p><label for="id_city"> City</label>
+                            <input class="input" type="text" value="{{profile.city}}" maxlength="20" required
+                                   name="city"
+                                   placeholder="City">
+                        </p>
+                        <p><label for="id_country"> Country</label>
+                            <input class="input" type="text" value="{{profile.country}}" maxlength="20" required
+                                   name="country" placeholder="Country">
+                        </p>
+                        <div class="pull-right">
+<!--                            <a href="/order/orderproduct" class="primary-btn" type="submit"><button type="submit">Complate Order</button></a>-->
+                        </div>
+                    </div>
+                </div>
+                    <div class="col-md-6">
+                        <div class="shiping-methods">
+                            <div class="section-title">
+                                <h4 class="title">Payment Information</h4>
+                            </div>
+                            <p><label for="id_last_name"> Total:</label>
+                                <input class="input" type="text" value="{{total}}" maxlength="10" readonly
+                                       name="last-name">
+                            </p>
+                            <p><label for="id_last_name">Credit Card Holder</label>
+                                <input class="input" type="text" value=""
+                                       name="holder">
+                            </p>
+                            <p><label for="id_last_name"> Credit Card Number</label>
+                                <input class="input" type="text" value=""
+                                       name="number">
+
+                            </p>
+
+                            <p><label for="id_last_name">Credit Card exp date/year</label>
+                                <input class="input" type="text" value=""
+                                       name="ecpdate">
+                            </p>
+                            <p><label for="id_last_name"> security number</label>
+                                <input class="input" type="text" value=""
+                                       name="secnumber">
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <div class="order-summary cleafixr">
+            <div class="section-title">
+                <h3 class="title">Shop Cart Product list</h3>
+            </div>
+            <table class="shopping-cart-table table">
+                <thead>
+                <tr>
+                    <th>Product</th>
+                    <th></th>
+                    <th class="text-center">Price</th>
+                    <th class="text-center">Quantity</th>
+                    <th class="text-center">Total</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for rs in shopcart %}
+                <tr>
+                    <td class="thumb"><img alt="" src="{{rs.Product.image.url}}"></td>
+                    <td class="details"><a href="/product/{{rs.Product.id}}/{{rs.Product.slug}}">{{rs.Product}}</a>
+
+                    </td>
+                    <td class="price text-center"><strong>Rs.{{rs.Product.price}}</strong></td>
+                    <td class="qty text-center"><strong>{{rs.quantity}}</strong></td>
+                    <td class="total text-center"><strong class="primary-color">Rs.{{rs.amount}}</strong></td>
+
+
+                </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th class="empty" colspan="3"></th>
+                    <th>Sub Total</th>
+                    <th class="sub-total" colspan="2">Rs.{{ total }}</th>
+                </tr>
+                <tr>
+                    <th class="empty" colspan="3"></th>
+                    <th>Shiping</th>
+                    <td colspan="2">Free Shipping</td>
+                </tr>
+                <tr>
+                    <th class="empty" colspan="3"></th>
+                    <th>Sub Total</th>
+                    <th class="total" colspan="2">Rs.{{ total }}</th>
+                </tr>
+                </tfoot>
+            </table>
+
+        </div>
+    </div>
+</div>
+<!-- /row -->
+</div>
+<!-- /container -->
+</div>
+<!-- /section -->
+{% endblock %}
+{% block footer %} {% include 'footer.html' %} {%endblock%}
