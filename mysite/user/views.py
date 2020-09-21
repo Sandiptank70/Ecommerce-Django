@@ -15,10 +15,12 @@ from user.forms import SignUpForm
 
 from user.forms import UserUpdateForm, ProfileUpdateForm
 
-from order.models import ShopCart, OrderForm, Order
+from order.models import ShopCart, OrderForm
 
 from order.models import OrderProduct
 from product.models import product
+
+from order.models import Order
 
 
 @login_required(login_url='/login')
@@ -122,12 +124,36 @@ def user_password(request):
         form=PasswordChangeForm(request.user)
         return render(request,'user_password.html',{'form': form,'category': Category})
 
+@login_required(login_url='/login')
+def user_orders(request ):
+    Category = catagory.objects.all()
+    current_user=request.user
+
+    orders=Order.objects.filter(user_id=current_user.id)
+    context = {'category': Category,
+                'orders':orders
+               }
+    return render(request, 'user_orders.html', context)
 
 
+def user_orderdetail(request,id):
+    Category=catagory.objects.all()
+    current_user = request.user
+    orders=Order.objects.get(user_id=current_user.id)
+    orderitems=OrderProduct.objects.filter(order_id=id)
+    context = {'category': Category,
+               'orders': orders,
+               'orderitems':orderitems
+               }
+    return render(request,'user_order_detail.html',context)
 
 
+def user_orders_product(request):
+    Category = catagory.objects.all()
+    current_user = request.user
 
-
-
-
-
+    orders_product = OrderProduct.objects.filter(user_id=current_user.id)
+    context = {'category': Category,
+               'orders_product': orders_product
+               }
+    return render(request, 'user_order_product.html', context)

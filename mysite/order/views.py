@@ -13,7 +13,9 @@ from product.models import catagory, product, Images, Comment
 
 from user.models import UserProfile
 
-from order.models import OrderForm, Order, OrderProduct
+from order.models import OrderForm, Order
+
+from order.models import OrderProduct
 
 
 def index(request):
@@ -101,18 +103,22 @@ def orderproduct(request):
             data.total = total
             data.ip = request.META.get('REMOTE_ADDR')
             ordercode = get_random_string(5).upper()
+            data.code=ordercode
             data.save()
+
+
             shopcart = ShopCart.objects.filter(user_id=current_user.id)
             for rs in shopcart:
                 detail = OrderProduct()
                 detail.order_id = data.id
-                detail.product_id = rs.product_id
+                detail.product_id=rs.Product_id
+
                 detail.user_id = current_user.id
                 detail.quantity = rs.quantity
-                detail.price = rs.product.price
+                detail.price = rs.Product.price
                 detail.amount = rs.amount
                 detail.save()
-                Product = product.objects.get(id=rs.product_id)
+                Product = product.objects.get(id=rs.Product_id)
                 Product.amount -= rs.quantity
                 Product.save()
 
