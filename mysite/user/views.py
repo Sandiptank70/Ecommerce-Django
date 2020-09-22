@@ -22,6 +22,8 @@ from product.models import product
 
 from order.models import Order
 
+from product.models import Comment
+
 
 @login_required(login_url='/login')
 def index(request):
@@ -157,3 +159,14 @@ def user_orders_product(request):
                'orders_product': orders_product
                }
     return render(request, 'user_order_product.html', context)
+
+
+def user_comments(request):
+    Category=catagory.objects.all()
+    currrent_user=request.user
+    comments=Comment.objects.filter(user_id=currrent_user.id)
+    context={'category': Category,
+               'comments': comments
+
+    }
+    return render(request,'user_comments.html',context)
