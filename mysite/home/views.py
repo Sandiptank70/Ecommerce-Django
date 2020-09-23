@@ -19,6 +19,8 @@ from product.models import Images
 
 from product.models import Comment
 
+from product.models import Variants
+
 
 def index(request):
     setting=Settings.objects.get(pk=1)
@@ -86,8 +88,9 @@ def search_auto(request):
   return HttpResponse(data, mimetype)
 
 def product_detail(request,id,slug):
+    query=request.GET.get('q')
+    Product = product.objects.get(pk=id)
     category=catagory.objects.all()
-    Product=product.objects.get(pk=id)
     images=Images.objects.filter(product_id=id)
     comments=Comment.objects.filter(product_id=id,status='True')
 
@@ -97,7 +100,32 @@ def product_detail(request,id,slug):
                 'images': images,
                  'comments':comments
       }
+    if Product.variant !="None":
+        if request.method=='POST':
+            variant_id=request.POST.get('variantid')
+            variant=Variants.objects.get(id=variant_id)
+            colors=Variants.objects.filter(Product_id=id,size_id=variant.size_id)
+            sizes=Variants.objects.raw('SELECT * FROM Product_variants WHERE Product_id=%s GROUP BY size_id',[id])
+            query+=variant.title+'Size:'+str(variant.size)+'Color:'+str(variant.color)
+        else:
+            variants=Variants.objects.filter(Product_id=id)
+            colors=Variants.objects.filter(Product_id=id,size_id=variants[0].size_id)
+            sizes = Variants.objects.raw('SELECT * FROM Product_variants WHERE Product_id=%s GROUP BY size_id', [id])
+            variant=Variants.objects.get(id=variants[0].id)
+            context.update({
+                'sizes':sizes,
+                'colors':colors,
+                'variant': variant,
+                'query': query,
+
+             })
     return render(request, 'product_detail.html', context)
 
+def ajaxcolor(request):
+    data={}
+    if request.POST.get('action')=='post':
+        size_id=request.POST.get('size')
+        Productid=request.POST.get('productid')
+        colors=Variants.objects.filter(Product_id=Productid,size_id=size_id)
 
 
