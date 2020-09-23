@@ -29,7 +29,7 @@ class catagory(MPTTModel):
     image = models.ImageField(blank=True, upload_to='images/')
     status = models.CharField(max_length=10, choices=STATUS)
     slug = models.SlugField(null=False, unique=True)
-    parent = models.ForeignKey('self', blank=True, null=True, related_name='children', on_delete=models.CASCADE)
+   # parent = models.ForeignKey('self', blank=True, null=True, related_name='children', on_delete=models.CASCADE)
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
@@ -57,6 +57,12 @@ class product(models.Model):
         ('false', 'false')
 
     )
+    VARIANTS=(
+        ('None','None'),
+        ('Size','Size'),
+        ('Color','Color'),
+        ('Size-Color','Size-Color')
+    )
     catagory = models.ForeignKey(catagory, on_delete=models.CASCADE)
     title = models.CharField(max_length=30)
     keyword = models.CharField(max_length=255)
@@ -65,6 +71,7 @@ class product(models.Model):
     price = models.FloatField()
     amount = models.IntegerField()
     minamount = models.IntegerField()
+    variant=models.CharField(max_length=10,choices=VARIANTS,default='None')
     detail = RichTextUploadingField()  # models.textfields ()
     slug = models.SlugField(null=False, unique=True)
     status = models.CharField(max_length=10, choices=STATUS)
@@ -134,4 +141,43 @@ class Comment(models.Model):
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ['subject','comment','rate']
+        fields = ['subject','comment']
+class Color (models.Model):
+    name=models.CharField(max_length=20)
+    code=models.CharField(max_length=10,blank=True,null=True)
+    def __str__(self):
+        return self.name
+    def color_tag(self):
+        if self.code is not None:
+            return mark_safe('<p style="background-color:{}">Color</p>'.format(self.code))
+        else:
+            return ""
+class Size(models.Model):
+    name=models.CharField(max_length=20)
+    code=models.CharField(max_length=10,blank=True,null=True)
+    def __str__(self):
+        return self.name
+
+class Variants(models.Model):
+    title=models.CharField(max_length=100,blank=True,null=True)
+    product=models.ForeignKey(product, on_delete=models.CASCADE)
+    color=models.ForeignKey(Color,on_delete=models.CASCADE,blank=True,null=True)
+    size=models.ForeignKey(Size,on_delete=models.CASCADE,blank=True,null=True)
+    image_id=models.IntegerField(blank=True,null=True,default=0)
+    quantity=models.IntegerField(default=1)
+    price=models.FloatField(default=0)
+    def __str__(self):
+        return self.title
+    def image(self):
+        img=Images.objects.get(id=self.image_id)
+        if img.id is not None:
+            varimage=img.image.url
+        else:
+            varimage=""
+        return varimage
+    def image_tag(self):
+        img=Images.objects.get(id=self.image_id)
+        if img.id is not None:
+            return mark_safe('<img src="{}" heights="50"/>'.format(img.image.url))
+        else:
+            return ""

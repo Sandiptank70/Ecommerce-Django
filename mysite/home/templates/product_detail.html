@@ -36,7 +36,7 @@
                         </div>
                         {% for rs in images %}
                         <div class="product-view">
-                            <img alt="" src="{{ rs.image.url}}" style="height:400px">
+                            <img alt="" src="{{ rs.image.url}}" style="height:400px" >
                         </div>
                         {% endfor %}
 
@@ -47,7 +47,7 @@
                         </div>
                         {% for rs in images %}
                         <div class="product-view">
-                            <img alt="" src="{{ rs.image.url}}" ">
+                            <img alt="" src="{{ rs.image.url}}">
                         </div>
                         {% endfor %}
                     </div>
@@ -63,17 +63,7 @@
                         <h3 class="product-price">RS.{{ Product.price}}
                             <del class="product-old-price">Rs.45.00</del>
                         </h3>
-                        <div>
-                            <div class="product-rating">
-                                <i class="fa fa-star{% if Product.averagereview < 1%}-o empty{% endif %}"></i>
-                                <i class="fa fa-star{% if Product.averagereview < 2%}-o empty{% endif %}"></i>
-                                <i class="fa fa-star{% if Product.averagereview < 3%}-o empty{% endif %}"></i>
-                                <i class="fa fa-star{% if Product.averagereview < 4%}-o empty{% endif %}"></i>
-                                <i class="fa fa-star{% if Product.averagereview < 5%}-o empty{% endif %}"></i>
-                                {{Product.averagereview |stringformat:".2f"}}
-                            </div>
-                            <a href="#tab1">{{Product.countreview}} Review(s)/ add Review</a>
-                        </div>
+
                         <p><strong>Availability:</strong> In Stock</p>
                         <p><strong>Brand:</strong> E-SHOP</p>
                         <p>{{ Product.descripation}}.</p>
@@ -98,7 +88,8 @@
                                 {% csrf_token %}
                                 <div class="qty-input">
                                     <span class="text-uppercase">QTY: </span>
-                                    <input class="input" max="{{ Product.amount }}" min="1" name="quantity" type="number"
+                                    <input class="input" max="{{ Product.amount }}" min="1" name="quantity"
+                                           type="number"
                                            value="1">
                                 </div>
                                 <button class="primary-btn add-to-cart" type="submit"><i
@@ -129,7 +120,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="product-reviews">
-                                            {% for rs in comments %}
+                                            {% for rs in comment %}
 
                                             <div class="single-review">
                                                 <div class="review-heading">
@@ -140,13 +131,7 @@
                                                     <div><a href="#"><i class="fa fa-clock-o"></i> {{ rs.create_at
                                                         }}</a>
                                                     </div>
-                                                    <div class="review-rating pull-right">
-                                                        <i class="fa fa-star{% if rs.rate < 1 %}-o empty {% endif %}"></i>
-                                                        <i class="fa fa-star{% if rs.rate < 2 %}-o empty {% endif %}"></i>
-                                                        <i class="fa fa-star{% if rs.rate < 3 %}-o empty {% endif %}"></i>
-                                                        <i class="fa fa-star{% if rs.rate < 4 %}-o empty {% endif %}"></i>
-                                                        <i class="fa fa-star{% if rs.rate < 5 %}-o empty {% endif %}"></i>
-                                                    </div>
+
                                                 </div>
                                                 <div class="review-body">
                                                     <p>{{ rs.comment }}</p>
@@ -169,7 +154,8 @@
                                                       method="POST">
                                                     {% csrf_token %}
                                                     <div class="form-group">
-                                                        <input class="input" name="subject" placeholder="Enter your Subject"
+                                                        <input class="input" name="subject"
+                                                               placeholder="Enter your Subject"
                                                                type="text"/>
                                                     </div>
 
@@ -177,28 +163,8 @@
                                                 <textarea class="input" name="comment"
                                                           placeholder="Your review"></textarea>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <div class="input-rating">
-                                                            <strong class="text-uppercase">Your Rating: </strong>
-                                                            <div class="stars">
-                                                                <input id="star5" name="rate" type="radio"
-                                                                       value="5"/><label
-                                                                    for="star5"></label>
-                                                                <input id="star4" name="rate" type="radio"
-                                                                       value="4"/><label
-                                                                    for="star4"></label>
-                                                                <input id="star3" name="rate" type="radio"
-                                                                       value="3"/><label
-                                                                    for="star3"></label>
-                                                                <input id="star2" name="rate" type="radio"
-                                                                       value="2"/><label
-                                                                    for="star2"></label>
-                                                                <input id="star1" name="rate" type="radio"
-                                                                       value="1"/><label
-                                                                    for="star1"></label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+
+
                                                     {% if user.id is not None %}
                                                     <button class="primary-btn">Submit</button>
                                                     {% else %}
