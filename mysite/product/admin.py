@@ -53,12 +53,12 @@ class CategoryAdmin2(DraggableMPTTAdmin):
 @admin_thumbnails.thumbnail('image')
 class ProductImageInline(admin.TabularInline):
     model = Images
-    #readonly_fields = ('id',)
-    extra = 5
+    readonly_fields = ('id',)
+    extra = 1
 
 class ProductVariantsInline(admin.TabularInline):
     model=Variants
-    #readonly_fields = ('image_tag')
+    readonly_fields = ('image_tag')
     extra = 1
     show_change_link = True
 
@@ -70,7 +70,7 @@ class ImageAdmin(admin.ModelAdmin):
 class productAdmin(admin.ModelAdmin):
      list_display = ['title','catagory','status']
      list_filter = ['status']
-     #readonly_fields = ('image_tag',)
+     readonly_fields = ('image_tag',)
      inlines =[ProductImageInline,ProductVariantsInline]
      prepopulated_fields = {'slug':('title',)}
 

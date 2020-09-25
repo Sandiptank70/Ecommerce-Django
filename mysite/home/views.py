@@ -1,11 +1,12 @@
 import json
 
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 
 # Create your views here.
 
 import home.models
+from django.template.loader import render_to_string
 
 from home.models import Settings
 
@@ -125,7 +126,15 @@ def ajaxcolor(request):
     data={}
     if request.POST.get('action')=='post':
         size_id=request.POST.get('size')
-        Productid=request.POST.get('productid')
-        colors=Variants.objects.filter(Product_id=Productid,size_id=size_id)
+        productid=request.POST.get('productid')
+        colors=Variants.objects.filter(Product_id=productid,size_id=size_id)
+        contex={
+            'size_id':size_id,
+            'productid':productid,
+            'colors':colors
+        }
+        data={'rendered_table':render_to_string('color_list.html',contex = contex)}
+        return JsonResponse(data)
+    return JsonResponse(data)
 
 
