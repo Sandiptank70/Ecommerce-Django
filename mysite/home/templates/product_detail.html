@@ -91,7 +91,7 @@
                         <div class="product-btns">
                         <div class="row">
 
-
+                    {% if product.variant == 'Size-Color' %}
                             <div class="product-options">
                                 <div class="size-option">
 
@@ -131,8 +131,9 @@
                                         </ul>
                                     </div>
                                 </form>
-                            </div>{% elif product.variant=='
-                            color'%}
+                            </div>
+                            {% elif product.variant == 'color'%}
+
                                 <form method="post" action="?q=selectvariant" id="post-color">
                                     {% csrf_token %}
                                     <div id="appendHere">
@@ -156,6 +157,7 @@
                                     </div>
                                 </form>
                         </div>
+                            {% endif %}
                             {% if product.variant != 'None' %}
                             <form action="/order/addtoshopcart/{{product.id}}"method="post" id="addchart-form">
                                 {%csrf_token%}
@@ -174,7 +176,22 @@
                                 </div>
                             </form>
                             {% else %}
-                            {% endif %}
+                            <form action="/order/addtoshopcart/{{product.id}}"method="post" id="addchart-form">
+                                {%csrf_token%}
+                                <input type="hidden" name="variantid" id="variantid" value="{{variant.id}}">
+                                <div id="SelectProduct">
+                                    <p><strong>Availability:</strong>{% if variant.amount > 0 %} In Stock {% else %}Out Of Stock{%endif%}</p>
+                                    <p><strong>Selected:</strong>Size:{{variant.size}} Color:{{variant.color}}</p>
+                                    <h3 class="product-price">Rs.{{variant.size}}</h3>
+                                    <div class="qty-input">
+                                        <span class="text-uppercase">Qty:</span>
+                                        <input class="input" name="quantity" type="number" value="1" min="1" max="{{variant.quantity}}">
+                                        <button type="submit"{% if variant.quantity < 1 %} disabled {%endif%} class = "primary-btn">
+                                        <i class="fa fa-shopping-cart"></i>Add to Cart
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
                         <p>{{ Product.descripation}}.</p>
 
                         <div class="product-options">
