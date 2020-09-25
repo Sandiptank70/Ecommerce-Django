@@ -105,12 +105,12 @@ def product_detail(request,id,slug):
         if request.method=='POST':
             variant_id=request.POST.get('variantid')
             variant=Variants.objects.get(id=variant_id)
-            colors=Variants.objects.filter(Product_id=id,size_id=variant.size_id)
+            colors=Variants.objects.filter(product_id=id,size_id=variant.size_id)
             sizes=Variants.objects.raw('SELECT * FROM Product_variants WHERE Product_id=%s GROUP BY size_id',[id])
             query+=variant.title+'Size:'+str(variant.size)+'Color:'+str(variant.color)
         else:
-            variants=Variants.objects.filter(Product_id=id)
-            colors=Variants.objects.filter(Product_id=id,size_id=variants[0].size_id)
+            variants=Variants.objects.filter(product_id=id)
+            colors=Variants.objects.filter(product_id=id,size_id=variants[0].size_id)
             sizes = Variants.objects.raw('SELECT * FROM Product_variants WHERE Product_id=%s GROUP BY size_id', [id])
             variant=Variants.objects.get(id=variants[0].id)
             context.update({
