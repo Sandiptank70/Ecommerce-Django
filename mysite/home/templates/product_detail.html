@@ -91,7 +91,7 @@
                         <div class="product-btns">
                         <div class="row">
 
-                    {% if product.variant == 'Size-Color' %}
+    {% if product.variant == 'Color' %}
                             <div class="product-options">
                                 <div class="size-option">
 
@@ -132,6 +132,7 @@
                                     </div>
                                 </form>
                             </div>
+
                             {% elif product.variant == 'color'%}
 
                                 <form method="post" action="?q=selectvariant" id="post-color">
@@ -159,12 +160,12 @@
                         </div>
                             {% endif %}
                             {% if product.variant != 'None' %}
-                            <form action="/order/addtoshopcart/{{product.id}}"method="post" id="addchart-form">
+                            <form action="/order/addtoshopcart/{{Product.id}}"method="post" id="addchart-form">
                                 {%csrf_token%}
                                 <input type="hidden" name="variantid" id="variantid" value="{{variant.id}}">
                                 <div id="SelectProduct">
                                     <p><strong>Availability:</strong>{% if variant.quantity > 0 %} In Stock {% else %}Out Of Stock{%endif%}</p>
-                                    <p><strong>Selected:</strong>Size:{{variant.size}} Color:{{variant.color}}</p>
+                                    <p><strong>Selected :</strong> Size : {{variant.size}} Color : {{variant.color}}</p>
                                     <h3 class="product-price">Rs.{{variant.size}}</h3>
                                     <div class="qty-input">
                                         <span class="text-uppercase">Qty:</span>
@@ -176,7 +177,7 @@
                                 </div>
                             </form>
                             {% else %}
-                            <form action="/order/addtoshopcart/{{product.id}}"method="post" id="addchart-form">
+                              <form action="/order/addtoshopcart/{{ Product.id }}"  method="post" id="addchart-form">
                                 {%csrf_token%}
                                 <input type="hidden" name="variantid" id="variantid" value="{{variant.id}}">
                                 <div id="SelectProduct">
@@ -192,44 +193,15 @@
                                     </div>
                                 </div>
                             </form>
+                            {% endif %}
+                        </div>
+                        <br>
+
                         <p>{{ Product.descripation}}.</p>
 
-                        <div class="product-options">
-                            <ul class="size-option">
-                                <li><span class="text-uppercase">Size:</span></li>
-                                <li class="active"><a href="#">S</a></li>
-                                <li><a href="#">XL</a></li>
-                                <li><a href="#">SL</a></li>
-                            </ul>
-                            <ul class="color-option">
-                                <li><span class="text-uppercase">Color:</span></li>
-                                <li class="active"><a href="#" style="background-color:#475984;"></a></li>
-                                <li><a href="#" style="background-color:#8A2454;"></a></li>
-                                <li><a href="#" style="background-color:#BF6989;"></a></li>
-                                <li><a href="#" style="background-color:#9A54D8;"></a></li>
-                            </ul>
-                        </div>
 
-                        <div class="product-btns">
-                            <form action="/order/addtoshopcart/{{ Product.id }}" method="post">
-                                {% csrf_token %}
-                                <div class="qty-input">
-                                    <span class="text-uppercase">QTY: </span>
-                                    <input class="input" max="{{ Product.amount }}" min="1" name="quantity"
-                                           type="number"
-                                           value="1">
-                                </div>
-                                <button class="primary-btn add-to-cart" type="submit"><i
-                                        class="fa fa-shopping-cart"></i> Add to Cart
-                                </button>
-                            </form>
-                            <div class="pull-right">
-                                <button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
-                                <button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
-                                <button class="main-btn icon-btn"><i class="fa fa-share-alt"></i></button>
-                            </div>
-                        </div>
-                    </div>
+
+
                 </div>
                 <div class="col-md-12">
                     <div class="product-tab">
