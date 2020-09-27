@@ -43,7 +43,6 @@ urlpatterns = [
     path ('signup/',UserViews.signup_form,name='signup_form'),
     path ('logout/',UserViews.logout_func,name='logout_func'),
     path('shopcart/',OrderViews.shopcart,name='shopcart'),
-    path('ajaxcolor/',views.ajaxcolor,name='ajaxcolor'),
 
 ]
 if settings.DEBUG:
