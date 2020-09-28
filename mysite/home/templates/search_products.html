@@ -1,35 +1,128 @@
 {% extends 'homebase.html' %}
 
-{% block title %} {{ query }} result {% endblock %}
+{% block title %} {{ setting.title}} {% endblock %}
 {% block description %}{{setting.description}} {% endblock %}
 {% block keywords %}{{setting.keywords}} {% endblock %}
 {% block slidebar %}  {% include 'slidebar.html' %}      {% endblock %}
 
 {% block body %}
 
-	<!-- BREADCRUMB -->
-	<div id="breadcrumb">
-		<div class="container">
-			<ul class="breadcrumb">
-				<li><a href="#">Home</a></li>
-				<li class="active"> {{ query }} result </li> </li>
-			</ul>
-		</div>
-	</div>
-	<!-- /BREADCRUMB -->
+<!-- BREADCRUMB -->
+<div id="breadcrumb">
+    <div class="container">
+        <ul class="breadcrumb">
+            <li><a href="#">Home</a></li>
+            <li class="active"> {{ catdata.title }}</li>
+        </ul>
+    </div>
+</div>
+<!-- /BREADCRUMB -->
 
 <!-- section -->
-	<div class="section">
-		<!-- container -->
-		<div class="container">
-			<!-- row -->
-			<div class="row">
-				My shopcart list
-			</div>
-			<!-- /row -->
-		</div>
-		<!-- /container -->
-	</div>
-	<!-- /section -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- ASIDE -->
+            <div id="aside" class="col-md-12">
+                <!-- aside widget -->
+
+                <!-- /aside widget -->
+
+                <!-- aside widget -->
+
+                <!-- aside widget -->
+
+                <!-- aside widget -->
+
+                <!-- /aside widget -->
+
+                <!-- aside widget -->
+
+                <!-- /aside widget -->
+
+                <!-- aside widget -->
+
+
+                <!-- /aside widget -->
+
+                <!-- aside widget -->
+
+                <!-- /widget product -->
+
+                <!-- widget product -->
+
+                <!-- /widget product -->
+            </div>
+            <!-- /aside widget -->
+        </div>
+        <!-- /ASIDE -->
+
+        <!-- MAIN -->
+        <div id="main" class="col-md-12">
+            <!-- store top filter -->
+
+
+            <!-- STORE -->
+            <div id="store">
+                <!-- row -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="order-summary clearfix">
+                            <div class="section-title">
+                                <h3 class="title">Product List</h3>
+                            </div>
+                            <table class="shopping-cart-table table">
+                                <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th></th>
+                                    <th class="text-center">Price</th>
+                                    <th class="text-center">Quantity</th>
+
+                                    <th class="text-right"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for rs in products %}
+                                <tr>
+                                    <td class="thumb"><a href="/product/{{ rs.id }}/{{ rs.slug }}">
+                                        <img src="{{ rs.image.url }}" alt="" style="height:100px">
+                                    </a></td>
+                                    <td class="details"><a href="/product/{{rs.id}}/{{rs.slug}}">{{ rs.title }}</a></td>
+                                    <td class="price text-center"><strong>{{ rs.price }}</strong><br>
+                                        <del class="font-weak"><small></small></del>
+                                    </td>
+                                    <td class="qty text-center"><input class="input" type="number" value="1"></td>
+
+                                    <td class="text-right"><a href="/order/addtoshopcart/{{rs.id}}"
+                                                              class="primary-btn add-to-cart"><i
+                                            class="fa fa-shopping-cart"></i> Add to Cart</a>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- /row -->
+                </div>
+                <!-- /STORE -->
+
+                <!-- store bottom filter -->
+
+            </div>
+            <!-- /MAIN -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /section -->
 {% endblock %}
 {% block footer %} {% include 'footer.html' %} {%endblock%}

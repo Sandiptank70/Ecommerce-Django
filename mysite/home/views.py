@@ -23,7 +23,7 @@ from product.models import Comment
 def index(request):
     setting=Settings.objects.get(pk=1)
     category=catagory.objects.all()
-    products_slider=product.objects.all().order_by('id')[:4]
+    products_slider=product.objects.all().order_by('?')[:4]
     products_latest=product.objects.all().order_by('-id')[:4]
     products_picked=product.objects.all().order_by('?')[:4]
     page="home"
