@@ -137,10 +137,10 @@ def user_orders(request ):
                }
     return render(request, 'user_orders.html', context)
 
-
+@login_required(login_url='/login')
 def user_orderdetail(request,id):
     Category=catagory.objects.all()
-    current_user = request.user
+    current_user=request.user
     orders=Order.objects.get(user_id=current_user.id)
     orderitems=OrderProduct.objects.filter(order_id=id)
     context = {'category': Category,
@@ -149,7 +149,7 @@ def user_orderdetail(request,id):
                }
     return render(request,'user_order_detail.html',context)
 
-
+@login_required(login_url='/login')
 def user_orders_product(request):
     Category = catagory.objects.all()
     current_user = request.user
@@ -160,7 +160,7 @@ def user_orders_product(request):
                }
     return render(request, 'user_order_product.html', context)
 
-
+@login_required(login_url='/login')
 def user_comments(request):
     Category=catagory.objects.all()
     currrent_user=request.user

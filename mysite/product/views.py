@@ -26,4 +26,6 @@ def addcomment(request,id):
             data.save()
             messages.success(request,"your message is sent . Thank you For Message")
             return HttpResponseRedirect(url)
+        else:
+            messages.warning(request,"something is wrong")
     return HttpResponseRedirect(url)

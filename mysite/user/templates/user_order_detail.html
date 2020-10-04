@@ -73,13 +73,13 @@
                     </div>
                     <table class="shopping-cart-table table">
                         <tr>
-                            <th class="text-left">Id</th>
-                            <th class="text-left">Product Name</th>
-                            <th class="text-left">Price</th>
-                            <th class="text-left">Quantity</th>
-                            <th class="text-left">Amount</th>
-                            <th class="text-left">Status</th>
-                            <th class="text-left">Date</th>
+                            <th class="text-center" width="100">Image</th>
+                            <th class="text-center" width="300">Product Name</th>
+                            <th class="text-center" width="100">Price</th>
+                            <th class="text-center" width="100">Quantity</th>
+                            <th class="text-center" width="100">Amount</th>
+                            <th class="text-center" width="100">Status</th>
+                            <th class="text-center" width="100">Date</th>
                         </tr>
                         {% for rs in orderitems %}
                         <tr>
@@ -89,11 +89,11 @@
                                 </a>
                             </td>
                             <td class="text-left">{{rs.product.title}}</td>
-                            <td class="text-left">{{rs.price}}</td>
-                            <td class="text-left">{{rs.quantity}}</td>
-                            <td class="text-left">{{rs.amount}}</td>
-                            <td class="text-left">{{rs.status}}</td>
-                            <td class="text-left">{{rs.create_at}}</td>
+                            <td class="text-center">{{rs.price}}</td>
+                            <td class="text-center">{{rs.quantity}}</td>
+                            <td class="text-center">{{rs.amount}}</td>
+                            <td class="text-center">{{rs.status}}</td>
+                            <td class="text-center">{{rs.create_at}}</td>
                         </tr>
                         {% endfor %}
                     </table>

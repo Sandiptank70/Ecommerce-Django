@@ -134,4 +134,4 @@ class Comment(models.Model):
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ['subject','comment','rate']
+        fields = ['subject','comment']

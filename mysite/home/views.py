@@ -27,7 +27,7 @@ def index(request):
     products_latest=product.objects.all().order_by('-id')[:4]
     products_picked=product.objects.all().order_by('?')[:4]
     page="home"
-    context={'setting':Settings,
+    context={'setting':setting,
              'page':page,
              'products_slider':products_slider,
              'products_latest':products_latest,
@@ -36,12 +36,15 @@ def index(request):
     return render(request,'index.html',context)
 
 def aboutus(request):
-    setting=Settings.objects.get(pk=1)
-    context={'setting':Settings}
+    setting=Settings.objects.get( pk=1 )
+    category = catagory.objects.all()
+    context={ 'setting':setting ,
+              'category':category}
     return render(request,'about.html',context)
 def contactus(request):
     setting=Settings.objects.get(pk=1)
-    context={'setting':Settings}
+    category = catagory.objects.all()
+    context={'setting':setting,'category':category}
     return render(request,'contact.html',context)
 
 def category_products(request,id,slug):

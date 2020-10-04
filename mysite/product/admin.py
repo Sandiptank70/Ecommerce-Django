@@ -1,5 +1,3 @@
-
-
 from django.contrib import admin
 from mptt.admin import DraggableMPTTAdmin
 
@@ -8,6 +6,9 @@ import mysite
 from product.models import catagory, product, Images
 
 from product.models import Comment
+
+
+import admin_thumbnails
 
 
 class categoryAdmin(admin.ModelAdmin):
@@ -27,7 +28,7 @@ class CategoryAdmin2(DraggableMPTTAdmin):
         # Add cumulative product count
         qs = catagory.objects.add_related_count(qs,
                 product,
-                'catagory',
+                'categoriy',
                 'products_cumulative_count',
                 cumulative=True)
 
@@ -46,19 +47,35 @@ class CategoryAdmin2(DraggableMPTTAdmin):
     def related_products_cumulative_count(self, instance):
         return instance.products_cumulative_count
     related_products_cumulative_count.short_description = 'Related products (in tree)'
+
+@admin_thumbnails.thumbnail('image')
 class ProductImageInline(admin.TabularInline):
     model = Images
-    extra = 5
+    readonly_fields = ('id',)
+    extra = 1
+
+class ProductVariantsInline(admin.TabularInline):
+    readonly_fields = ('image_tag',)
+    extra = 1
+    show_change_link = True
+
+
+@admin_thumbnails.thumbnail('image')
+class ImageAdmin(admin.ModelAdmin):
+    list_display = ['image','title','image_thumbnail']
+
 class productAdmin(admin.ModelAdmin):
      list_display = ['title','catagory','status']
      list_filter = ['status']
-     #readonly_fields = ('image_tag',)
+     readonly_fields = ('image_tag',)
      inlines =[ProductImageInline]
      prepopulated_fields = {'slug':('title',)}
+
 class CommentAdmin(admin.ModelAdmin):
     list_display = ['subject','comment', 'status','create_at']
     list_filter = ['status']
-    readonly_fields= ('subject','comment','ip','user','product','rate')
+    readonly_fields= ('subject','comment','ip','user','product')
+
 
 admin.site.register(catagory,CategoryAdmin2)
 admin.site.register(product,productAdmin)
