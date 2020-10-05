@@ -30,9 +30,7 @@
             </div>
             <!-- /aside widget -->
         </div>
-        <!-- /ASIDE -->
-
-        <!-- MAIN -->
+        
         <div id="main" class="col-md-12">
             <!-- store top filter -->
 
@@ -49,8 +47,10 @@
                             <table class="shopping-cart-table table">
                                 <thead>
                                 <tr>
-                                    <th>Product</th>
-                                    <th></th>
+                                    <th width="100">Image</th>
+
+                                    <th width="600" class="text-center">Product</th>
+
                                     <th class="text-center">Price</th>
                                     <th class="text-center">Quantity</th>
 
@@ -63,7 +63,7 @@
                                     <td class="thumb"><a href="/product/{{ rs.id }}/{{ rs.slug }}">
                                         <img src="{{ rs.image.url }}" alt="" style="height:100px">
                                     </a></td>
-                                    <td class="details"><a href="/product/{{rs.id}}/{{rs.slug}}">{{ rs.title }}</a></td>
+                                    <td class="text-center"><b><h4><a href="/product/{{rs.id}}/{{rs.slug}}">{{ rs.title }}</a></h4></b></td>
                                     <td class="price text-center"><strong>{{ rs.price }}</strong><br>
                                         <del class="font-weak"><small></small></del>
                                     </td>
@@ -85,9 +85,7 @@
 
                     <!-- /row -->
                 </div>
-                <!-- /STORE -->
-
-                <!-- store bottom filter -->
+                
 
             </div>
             <!-- /MAIN -->

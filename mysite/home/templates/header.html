@@ -17,9 +17,7 @@
 
 			</div>
 		</div>
-		<!-- /top Header -->
-
-		<!-- header -->
+		
 		<div id="header">
 			<div class="container">
 				<div class="pull-left">
@@ -78,7 +76,7 @@
 							{% if user.id is not None %}
 							<div aria-expanded="true" class="dropdown-toggle" data-toggle="dropdown" role="button">
 								<div class="header-btns-icon">
-									<img alt="" src="{{ request.session.userimage }}" style="height:40px;border-radius:70%">
+									<img alt="" src="{{ request.session.userimage }}" style="height:40px;">
 								</div>
 								<strong class="text-uppercase">{{user.first_name}} <i class="fa fa-caret-down"></i></strong>
 							</div>
@@ -104,7 +102,7 @@
 								</div>
 								<strong class="text-uppercase">My Cart:</strong>
 								<br>
-								
+
 							</a>
 
 						</li>

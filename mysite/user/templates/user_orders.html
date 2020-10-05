@@ -1,8 +1,6 @@
 {% extends 'homebase.html' %}
 
 {% block title %} Order List {% endblock %}
-{% block description %}{{setting.description}} {% endblock %}
-{% block keywords %}{{setting.keywords}} {% endblock %}
 {% block slidebar %}  {% include 'slidebar.html' %}      {% endblock %}
 
 {% block body %}
@@ -36,23 +34,23 @@
                     </div>
                     <table class="shopping-cart-table table">
                         <tr>
-                            <th class="text-left">ID</th>
-                            <th class="text-left">First Name</th>
-                            <th class="text-left">Last Name</th>
-                            <th class="text-left">Total</th>
-                            <th class="text-left">Status</th>
-                            <th class="text-left">Date</th>
-                            <th class="text-left">Detail</th>
+                            <th class="text-center">ID</th>
+                            <th class="text-center">First Name</th>
+                            <th class="text-center">Last Name</th>
+                            <th class="text-center">Total</th>
+                            <th class="text-center">Status</th>
+                            <th class="text-center">Date</th>
+                            <th class="text-center">Detail</th>
                         </tr>
                    {% for rs in orders %}
                         <tr>
-                            <td class="text-left">{{rs.id}}</td>
-                            <td class="text-left">{{rs.first_name}}</td>
-                            <td class="text-left">{{rs.last_name}}</td>
-                            <td class="text-left">{{rs.total}}</td>
-                            <td class="text-left">{{rs.status}}</td>
-                            <td class="text-left">{{rs.create_at}}</td>
-                            <td class="text-left"><a href="/user/orderdetail/{{rs.id}}" class="primary-btn">Detail</a>
+                            <td class="text-center">{{rs.id}}</td>
+                            <td class="text-center">{{rs.first_name}}</td>
+                            <td class="text-center">{{rs.last_name}}</td>
+                            <td class="text-center">{{rs.total}}</td>
+                            <td class="text-center">{{rs.status}}</td>
+                            <td class="text-center">{{rs.create_at}}</td>
+                            <td class="text-center"><a href="/user/orderdetail/{{rs.id}}" class="primary-btn">Detail</a>
                             </td>
                         </tr>
                         {% endfor %}

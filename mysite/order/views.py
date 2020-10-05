@@ -78,7 +78,7 @@ def shopcart(request):
 def deletefromcart(request,id):
     ShopCart.objects.filter(id=id).delete()
     messages.success(request,"your item Delete From shopcart")
-    return HttpResponseRedirect("/shopcart")
+    return HttpResponseRedirect("/shopcart/")
 
 
 def orderproduct(request):

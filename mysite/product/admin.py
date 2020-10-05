@@ -28,7 +28,7 @@ class CategoryAdmin2(DraggableMPTTAdmin):
         # Add cumulative product count
         qs = catagory.objects.add_related_count(qs,
                 product,
-                'categoriy',
+                'catagory',
                 'products_cumulative_count',
                 cumulative=True)
 
@@ -65,8 +65,8 @@ class ImageAdmin(admin.ModelAdmin):
     list_display = ['image','title','image_thumbnail']
 
 class productAdmin(admin.ModelAdmin):
-     list_display = ['title','catagory','status']
-     list_filter = ['status']
+     list_display = ['title','catagory','status','image_tag']
+     list_filter = ['catagory']
      readonly_fields = ('image_tag',)
      inlines =[ProductImageInline]
      prepopulated_fields = {'slug':('title',)}

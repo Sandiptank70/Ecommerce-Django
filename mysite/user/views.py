@@ -149,6 +149,7 @@ def user_orderdetail(request,id):
                }
     return render(request,'user_order_detail.html',context)
 
+
 @login_required(login_url='/login')
 def user_orders_product(request):
     Category = catagory.objects.all()
